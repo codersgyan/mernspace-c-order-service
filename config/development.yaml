@@ -1,9 +1,0 @@
-server:
-  port: 5503
-  host: localhost
-auth:
-  jwksUri: http://localhost:5501/.well-known/jwks.json
-database:
-  url: mongodb://root:root@localhost:27017/order?authSource=admin&w=1
-kafka:
-  broker: localhost:9092
