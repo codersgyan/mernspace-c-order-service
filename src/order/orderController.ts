@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { Request as AuthRequest } from "express-jwt";
 import {
   CartItem,
   ProductPricingCache,
@@ -15,6 +16,7 @@ import mongoose from "mongoose";
 import createHttpError from "http-errors";
 import { PaymentGW } from "../payment/paymentTypes";
 import { MessageBroker } from "../types/broker";
+import customerModel from "../customer/customerModel";
 
 export class OrderController {
   constructor(
@@ -129,6 +131,29 @@ export class OrderController {
 
     // todo: Update order document -> paymentId -> sessionId
     return res.json({ paymentUrl: null });
+  };
+
+  getMine = async (req: AuthRequest, res: Response, next: NextFunction) => {
+    const userId = req.auth.sub;
+
+    if (!userId) {
+      return next(createHttpError(400, "No userId found."));
+    }
+
+    // todo: Add error handling.
+    const customer = await customerModel.findOne({ userId });
+
+    if (!customer) {
+      return next(createHttpError(400, "No customer found."));
+    }
+
+    // todo: implement pagination.
+    const orders = await orderModel.find(
+      { customerId: customer._id },
+      { cart: 0 },
+    );
+
+    return res.json(orders);
   };
 
   private calculateTotal = async (cart: CartItem[]) => {
