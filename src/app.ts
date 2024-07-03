@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import config from "config";
+// import config from "config";
 import cors from "cors";
 import { globalErrorHandler } from "./common/middleware/globalErrorHandler";
 import cookieParser from "cookie-parser";
