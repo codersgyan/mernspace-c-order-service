@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-// import config from "config";
+import config from "config";
 import cors from "cors";
 import { globalErrorHandler } from "./common/middleware/globalErrorHandler";
 import cookieParser from "cookie-parser";
@@ -10,12 +10,12 @@ import paymentRouter from "./payment/paymentRouter";
 
 const app = express();
 
-// const ALLOWED_DOMAINS = [
-//   config.get("frontend.clientUI"),
-//   config.get("frontend.adminUI"),
-// ];
+const ALLOWED_DOMAINS = [
+  config.get("frontend.clientUI"),
+  config.get("frontend.adminUI"),
+];
 
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({ origin: ALLOWED_DOMAINS as string[] }));
 app.use(cookieParser());
 app.use(express.json());
 
