@@ -10,12 +10,12 @@ import paymentRouter from "./payment/paymentRouter";
 
 const app = express();
 
-const ALLOWED_DOMAINS = [
-  config.get("frontend.clientUI"),
-  config.get("frontend.adminUI"),
-];
+// const ALLOWED_DOMAINS = [
+//   config.get("frontend.clientUI"),
+//   config.get("frontend.adminUI"),
+// ];
 
-app.use(cors({ origin: ALLOWED_DOMAINS as string[] }));
+app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 
