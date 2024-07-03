@@ -15,7 +15,7 @@ const app = express();
 //   config.get("frontend.adminUI"),
 // ];
 
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 app.use(cookieParser());
 app.use(express.json());
 
