@@ -15,7 +15,7 @@ const ALLOWED_DOMAINS = [
   config.get("frontend.adminUI"),
 ];
 
-app.use(cors({ origin: ALLOWED_DOMAINS as string[] }));
+app.use(cors({ origin: ALLOWED_DOMAINS as string[], credentials: true }));
 app.use(cookieParser());
 app.use(express.json());
 
