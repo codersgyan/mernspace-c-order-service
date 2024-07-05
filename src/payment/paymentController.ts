@@ -35,6 +35,9 @@ export class PaymentController {
         _id: updatedOrder.customerId,
       });
       // todo: Think about broker message fail.
+      console.log("updated order", updatedOrder.toObject(), {
+        ...updatedOrder.toObject(),
+      });
       const brokerMessage = {
         event_type: OrderEvents.PAYMENT_STATUS_UPDATE,
         data: {
