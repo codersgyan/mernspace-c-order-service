@@ -46,12 +46,10 @@ const cartSchema = new mongoose.Schema<CartItem>({
       of: String,
       required: true,
     },
-    selectedToppings: [
-      {
-        type: [toppingSchema],
-        required: true,
-      },
-    ],
+    selectedToppings: {
+      type: [toppingSchema],
+      required: true,
+    },
   },
 });
 
