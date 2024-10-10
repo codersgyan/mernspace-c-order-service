@@ -22,7 +22,7 @@ export class KafkaBroker implements MessageBroker {
     if (process.env.NODE_ENV === "production") {
       kafkaConfig = {
         ...kafkaConfig,
-        ssl: true,
+        ssl: config.get("kafka.ssl"),
         connectionTimeout: 45000,
         sasl: {
           mechanism: "plain",
